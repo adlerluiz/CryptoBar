@@ -23,9 +23,9 @@ function createWindow() {
     width: size.width,
     minWidth: 1000,
 
-    height: 38,
-    minHeight: 38,
-    maxHeight: 39,
+    height: 39,
+    minHeight: 39,
+    maxHeight: 40,
 
     resizable: true,
     maximizable: false,
