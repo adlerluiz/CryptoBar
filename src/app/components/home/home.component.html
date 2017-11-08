@@ -1,0 +1,33 @@
+<div class="row valign-wrapper drag">
+
+  <div class="center" *ngIf="!results.length">
+    <div class="preloader-wrapper small active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <span class="swing coin no-drag" *ngFor="let result of results" (click)="viewCoin( result )">
+      <img *ngIf="settings[ 'SHOW_IMAGE_BAR' ]" src="https://files.coinmarketcap.com/static/img/coins/64x64/{{ result[ 'id' ] }}.png" width="20" class="responsive-img rounded" style="padding: 1px;" />
+      <sup>{{ result[ settings[ 'COIN_DISPLAY' ] ] }}</sup>
+      <i class="material-icons" [ngClass]="{ 'green-text': result[ 'percent_change_24h' ] > 0, 'red-text': result[ 'percent_change_24h' ] < 0 }">
+        {{ result[ 'percent_change_24h' ] > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
+      </i>
+      <sup>{{ result[ 'percent_change_24h' ] }}%</sup>
+  </span>
+
+  <span style="position: absolute; right: 0; padding: 5px 10px 0 0;">
+    <span class="swing exchange right no-drag" *ngFor="let exchange of exchanges" (click)="viewExchange( exchange )">
+      <!--img src="{{ exchange[ 'image' ] ? exchange[ 'image' ] : './assets/background.png' }}" width="20" class="responsive-img" style="padding: 1px; background: #FFF;" /-->
+      <sup>{{ exchange[ 'name' ] }}</sup>
+    </span>
+  </span>
+
+</div>

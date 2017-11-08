@@ -1,0 +1,185 @@
+<div class="drag window-border">
+
+  <div class="no-drag" style="position: absolute; top: 6px; right: 10px;">
+    <i class="material-icons tiny" style="cursor: pointer;" (click)="close()">close</i>
+  </div>
+
+  <div class="row container">
+    <div class="center">
+      <h5>Settings</h5>
+    </div>
+
+    <div class="row no-drag">
+      <table class="bordered">
+        <tbody>
+          <tr>
+            <td>API</td>
+            <td>
+              <input name="api" type="radio" id="coinmarketcap" value="coinmarketcap" [(ngModel)]="settings[ 'API_SELECTED' ]" />
+              <label for="coinmarketcap">Coinmarketcap</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Time to refresh</td>
+            <td class="range-field">
+              <input type="range" min="5" max="300" [(ngModel)]="settings[ 'TIMEOUT' ]" />
+              <label> {{ settings[ 'TIMEOUT' ] }} {{ settings[ 'TIMEOUT' ] != 1 ? "Seconds" : "Second" }} </label>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Display Coin</td>
+            <td>
+              <p>
+                <input name="display_coin" type="radio" id="name" value="name" [(ngModel)]="settings[ 'COIN_DISPLAY' ]" />
+                <label for="name">Name (Ex: Bitcoin)</label>
+              </p>
+
+              <p>
+                <input name="display_coin" type="radio" id="symbol" value="symbol" [(ngModel)]="settings[ 'COIN_DISPLAY' ]" />
+                <label for="symbol">Symbol (Ex: BTC)</label>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Coin icon on bar</td>
+            <td>
+              <div class="switch">
+                <label>
+                  Off
+                  <input type="checkbox" [(ngModel)]="settings[ 'SHOW_IMAGE_BAR' ]">
+                  <span class="lever"></span>
+                  On
+                </label>
+              </div>
+            </td>
+          </tr>
+
+          <!--tr>
+            <td>Black theme</td>
+            <td>
+              <div class="switch">
+                <label>
+                  Off
+                  <input type="checkbox" [(ngModel)]="settings.darkTheme">
+                  <span class="lever"></span>
+                  On
+                </label>
+              </div>
+            </td>
+          </tr-->
+
+          <!--tr>
+            <td>Coins</td>
+            <td>
+              <a class="waves-effect waves-light btn small orange modal-trigger" href="#modalAddCoin">Edit</a>
+              <label> ({{ coins.length }} {{ coins.length > 1 ? "coins" : "coin" }}) </label>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Exchanges</td>
+            <td>
+              <a class="waves-effect waves-light btn small orange modal-trigger" href="#modalAddExchange">Edit</a>
+              <label> ({{ exchanges.length }} {{ exchanges.length > 1 ? "exchanges" : "exchange" }}) </label>
+            </td>
+          </tr-->
+
+        </tbody>
+      </table>
+
+      <div class="row center no-drag" style="margin-top: 4px;">
+        <div class="col s6">
+          <h6>Coins</h6>
+          <a class="waves-effect waves-light btn small orange modal-trigger" href="#modalAddCoin">Edit</a>
+          <br />
+          <label> ({{ coins.length }} {{ coins.length > 1 ? "coins" : "coin" }}) </label>
+        </div>
+
+        <div class="col s6">
+          <h6>Exchanges</h6>
+          <a class="waves-effect waves-light btn small orange modal-trigger" href="#modalAddExchange">Edit</a>
+          <br />
+          <label> ({{ exchanges.length }} {{ exchanges.length > 1 ? "exchanges" : "exchange" }}) </label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row center no-drag">
+      <button class="btn-flat waves-effect waves-red red-text" (click)="reset()">Reset</button>
+      <button class="btn waves-effect green" (click)="save()">Save</button>
+    </div>
+
+  </div>
+
+</div>
+<!------------------------------- MODALS ------------------------------->
+
+<div id="modalAddCoin" class="modal no-drag">
+  <div class="modal-content black-text">
+    <h5>Edit coins</h5>
+
+    <div class="row">
+      <div class="col s8">
+        <input type="text" [(ngModel)]="modalInputCoin" placeholder="Coin symbol" />
+      </div>
+
+      <div class="col s1">
+        <button class="btn green" (click)="addCoin()">
+          <i class="material-icons tiny">add</i>
+        </button>
+      </div>
+    </div>
+
+    <div class="collection">
+      <a class="collection-item" *ngFor="let coin of coins; let i = index">
+        <span class="badge" style="cursor: pointer;" (click)="removeCoin(i)"> <i class="material-icons tiny red-text">close</i> </span>
+        {{ coin }}
+      </a>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect btn-flat">close</a>
+  </div>
+</div>
+
+<div id="modalAddExchange" class="modal no-drag">
+  <div class="modal-content black-text">
+    <h5>Edit exchanges</h5>
+
+    <div class="row">
+      <div class="col s12">
+        <input type="text" [(ngModel)]="modalExchange['name']" placeholder="Name" />
+      </div>
+
+      <div class="col s12">
+        <input type="text" [(ngModel)]="modalExchange['url']" placeholder="Url" />
+      </div>
+
+      <div class="col s12">
+        <input type="text" [(ngModel)]="modalExchange['image']" placeholder="Image Url" />
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn green" (click)="addExchange()">
+        <i class="material-icons tiny">add</i>
+      </button>
+    </div>
+
+    <div class="collection">
+      <a class="collection-item" *ngFor="let exchange of exchanges; let i = index">
+        <span class="badge" style="cursor: pointer;" (click)="removeExchange(i)"> <i class="material-icons tiny red-text">close</i> </span>
+        {{ exchange[ 'name' ] }}
+      </a>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect btn-flat">close</a>
+  </div>
+</div>
