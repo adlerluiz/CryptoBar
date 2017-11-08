@@ -33,7 +33,7 @@ npm start
 
 or 
 
-Download [here](https://adlerluiz.com/CryptoBar)
+Download [here](https://github.com/adlerluiz/CryptoBar/releases)
 
 
 
