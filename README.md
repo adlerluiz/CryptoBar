@@ -1,6 +1,6 @@
 # Introduction
 
-CryptoBar is a way to control yours crypto currency in a discreet bar.
+CryptoBar is a way to check variations on your cryptocurrencies and tokens on a discreet bar.
 
 Currently runs with:
 
