@@ -21,13 +21,8 @@ function createWindow() {
     y: size.height - 40,
 
     width: size.width,
-    minWidth: 1000,
 
-    height: 39,
-    minHeight: 39,
-    maxHeight: 40,
-
-    resizable: true,
+    height: 40,
     maximizable: false,
 
     skipTaskbar: true,

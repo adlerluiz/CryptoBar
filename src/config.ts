@@ -25,18 +25,15 @@ export const DEFAULT_SETTINGS = {
   EXCHANGES: [
     {
       name: 'Bitfinex',
-      url: 'https://www.bitfinex.com/',
-      image: 'https://www.bitfinex.com/assets/logo3-dark-theme-90276da89b3131461fd422756694de9bf75895deee13e02809682be956e229ff.svg'
+      url: 'https://www.bitfinex.com/'
     },
     {
       name: 'Bittrex',
-      url: 'https://bittrex.com/',
-      image: 'https://bittrex.com/Content/img/logos/bittrex.ico'
+      url: 'https://bittrex.com/'
     },
     {
       name: 'Poloniex',
-      url: 'https://poloniex.com',
-      image: 'https://poloniex.com/images/poloniex_icon.png'
+      url: 'https://poloniex.com'
     }
   ]
 };
