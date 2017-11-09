@@ -1,7 +1,8 @@
 import { app, BrowserWindow, screen, Menu, Tray, nativeImage } from 'electron';
 import * as path from 'path';
+import * as Store from 'electron-store';
 
-let win, winSettings, serve, tray;
+let win, winSettings, serve, tray, height, offsetX, offsetY, alwaysOnTop;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 
@@ -9,23 +10,32 @@ if (serve) {
   require('electron-reload')( __dirname, {} );
 }
 
+const store = new Store();
+
 function createWindow() {
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
+
+  height = 40;
+  offsetX = ( store.get('config.offsetX') ) ? store.get('config.offsetX') : 0;
+  offsetY = ( store.get('config.offsetY') ) ? store.get('config.offsetY') : size.height - 40;
+  alwaysOnTop = ( store.get('config.alwaysOnTop') ? store.get('config.alwaysOnTop') : false );
 
   win = new BrowserWindow({
     title: 'CryptoBar',
     icon: 'src/favicon.ico',
     frame: false,
-    x: 0,
-    y: size.height - 40,
+    x: offsetX,
+    y: offsetY,
 
     width: size.width,
 
-    height: 40,
+    height: height,
     maximizable: false,
 
     skipTaskbar: true,
+
+    alwaysOnTop: alwaysOnTop,
 
     webPreferences: {
       nodeIntegration: false
@@ -38,6 +48,11 @@ function createWindow() {
     win = null;
   });
 
+  win.on('move', () => {
+    store.set( 'config.offsetX', win.getPosition()[0] );
+    store.set( 'config.offsetY', win.getPosition()[1] );
+  });
+
   createTray();
 }
 
@@ -48,11 +63,16 @@ function createTray() {
   tray = new Tray( nimage );
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Settings', type: 'normal', click: () => { openSettings() } },
-    { label: 'Always on top', type: 'checkbox', click: () => {
-      win.setAlwaysOnTop( !win.isAlwaysOnTop() )
+    { label: 'Always on top', type: 'checkbox', checked: alwaysOnTop, click: () => {
+      alwaysOnTop = !win.isAlwaysOnTop();
+
+      win.setAlwaysOnTop( alwaysOnTop );
+      store.set( 'config.alwaysOnTop', alwaysOnTop );
     } },
     { type: 'separator' },
-    { label: 'Exit', type: 'normal', click: () => { app.quit() } }
+    { label: 'Exit', type: 'normal', click: () => {
+      app.quit()
+    } }
   ]);
   tray.setToolTip( 'CryptoBar' );
   tray.setContextMenu( contextMenu );
