@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../../providers/settings.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-settings',
@@ -13,9 +14,11 @@ export class SettingsComponent implements OnInit {
   exchanges: any = [];
   modalInputCoin = '';
   modalExchange = {};
+  package = {};
 
   constructor(
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -23,6 +26,9 @@ export class SettingsComponent implements OnInit {
 
     this.coins = this.settings[ 'COINS' ];
     this.exchanges = this.settings[ 'EXCHANGES' ];
+
+    this.http.get('./package.json')
+      .subscribe(data => this.package = data);
   }
 
   close() {
