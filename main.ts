@@ -1,21 +1,10 @@
-import { app, BrowserWindow, screen, Menu, Tray, nativeImage, autoUpdater, dialog } from 'electron';
+import { app, BrowserWindow, screen, Menu, Tray, nativeImage } from 'electron';
 import * as path from 'path';
 import * as Store from 'electron-store';
 import * as isDev from 'electron-is-dev';
 
 let win, winSettings, serve, tray, height, offsetX, offsetY, alwaysOnTop;
 const args = process.argv.slice(1);
-
-/* AutoUpdate */
-const server = 'https://cryptobar.herokuapp.com';
-const feed = `${server}/update/${process.platform}/${app.getVersion()}`;
-
-if (!isDev) {
-  autoUpdater.setFeedURL(feed);
-  setInterval(() => {
-    autoUpdater.checkForUpdates();
-  }, 60000);
-}
 
 serve = args.some(val => val === '--serve');
 
@@ -140,22 +129,3 @@ try {
   // Catch Error
   // throw e;
 }
-
-autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-  const dialogOpts = {
-    type: 'info',
-    buttons: ['Restart', 'Later'],
-    title: 'CryptoBar Update',
-    message: process.platform === 'win32' ? releaseNotes : releaseName,
-    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-  };
-
-  dialog.showMessageBox(dialogOpts, (response) => {
-    if (response === 0) autoUpdater.quitAndInstall()
-  })
-});
-
-autoUpdater.on('error', message => {
-  console.error('There was a problem updating the application')
-  console.error(message)
-})
