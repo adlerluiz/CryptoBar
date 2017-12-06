@@ -99,7 +99,7 @@ function openSettings() {
     icon: 'src/favicon.ico',
 
     width: 400,
-    height: 570
+    height: 582
   });
 
   winSettings.loadURL('file://' + __dirname + '/index.html#/settings');

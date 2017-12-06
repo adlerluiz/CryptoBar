@@ -12,19 +12,32 @@
     <div class="row no-drag">
       <table>
         <tbody>
-          <tr>
+          <!--tr>
             <td>API</td>
             <td>
               <input name="api" type="radio" id="coinmarketcap" value="coinmarketcap" [(ngModel)]="settings[ 'API_SELECTED' ]" />
               <label for="coinmarketcap">Coinmarketcap</label>
             </td>
-          </tr>
+          </tr-->
 
           <tr>
             <td>Time to refresh</td>
             <td class="range-field">
               <input type="range" min="5" max="300" [(ngModel)]="settings[ 'TIMEOUT' ]" />
               <label> {{ settings[ 'TIMEOUT' ] }} {{ settings[ 'TIMEOUT' ] != 1 ? "Seconds" : "Second" }} </label>
+            </td>
+          </tr>
+
+          <tr>
+            <td> Percent change </td>
+            <td>
+
+                <input name="display_percent_change" type="radio" id="1h" value="percent_change_1h" [(ngModel)]="settings[ 'PERCENT_CHANGE' ]" />
+                <label for="1h">1h</label>
+
+                <input name="display_percent_change" type="radio" id="24h" value="percent_change_24h" [(ngModel)]="settings[ 'PERCENT_CHANGE' ]" />
+                <label for="24h">24h</label>
+
             </td>
           </tr>
 
@@ -44,7 +57,7 @@
           </tr>
 
           <tr>
-            <td>Coin icon on bar</td>
+            <td>Show coin icon</td>
             <td>
               <div class="switch">
                 <label>

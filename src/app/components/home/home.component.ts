@@ -54,6 +54,10 @@ export class HomeComponent implements OnInit {
     this.results = aux;
   }
 
+  getPercentChangeArrow( data ) {
+    return data[ this.settings['PERCENT_CHANGE'] ];
+  }
+
   viewCoin( coin ) {
     window.open(
       '#/coin/' + coin.id,
@@ -67,7 +71,8 @@ export class HomeComponent implements OnInit {
       'maxHeight=281,' +
       'minWidth=301,' +
       'minHeight=281,' +
-      'skipTaskbar=false'
+      'skipTaskbar=false,' +
+      'alwaysOnTop=false'
     );
   }
 
@@ -83,7 +88,8 @@ export class HomeComponent implements OnInit {
       'skipTaskbar=false,' +
       'frame=true,' +
       'menu=false,' +
-      'maximizable=true'
+      'maximizable=true,' +
+      'alwaysOnTop=false'
     );
   }
 
