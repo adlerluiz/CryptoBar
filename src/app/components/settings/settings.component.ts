@@ -14,7 +14,9 @@ export class SettingsComponent implements OnInit {
   exchanges: any = [];
   modalInputCoin = '';
   modalExchange = {};
-  package = {};
+  package: any = {
+	  version: '1'
+  };
 
   constructor(
     private settingsService: SettingsService,
