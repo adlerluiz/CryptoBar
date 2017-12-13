@@ -4,8 +4,12 @@
 }
 
 .coin {
-  margin: 5px 10px 0 10px;
+  margin: 5px 1px 0 10px;
   cursor: pointer;
+}
+
+.separator {
+  border-right: 1px solid #333;
 }
 
 .exchange {

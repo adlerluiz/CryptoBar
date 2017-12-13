@@ -16,11 +16,14 @@
 
   <span class="swing coin no-drag" *ngFor="let result of results" (click)="viewCoin( result )">
       <img *ngIf="settings[ 'SHOW_IMAGE_BAR' ]" src="https://files.coinmarketcap.com/static/img/coins/64x64/{{ result[ 'id' ] }}.png" width="20" class="responsive-img rounded" style="padding: 1px;" />
-      <sup>{{ result[ settings[ 'COIN_DISPLAY' ] ] }}</sup>
+      <sup style="color: #AAA;">{{ result[ settings[ 'COIN_DISPLAY' ] ] }}</sup>
       <i class="material-icons" [ngClass]="{ 'green-text': getPercentChangeArrow( result ) > 0, 'red-text': getPercentChangeArrow( result ) < 0 }">
         {{ getPercentChangeArrow( result ) > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
       </i>
-      <sup>{{ getPercentChangeArrow( result ) }}%</sup>
+      <sup>
+        {{ getPercentChangeArrow( result ) }}%  
+        <span class="separator"> </span>
+      </sup>
   </span>
 
   <span style="position: absolute; right: 0; padding: 5px 10px 0 0;">
