@@ -15,6 +15,10 @@ export class CoinInfoComponent implements OnInit {
   settings: object = {};
   coin: any = [];
   private sub: any;
+  defaultTimeChart = {
+    name: '1w',
+    value: 24 * 7
+  };
 
   constructor(
     private http: HttpClient,
@@ -38,24 +42,21 @@ export class CoinInfoComponent implements OnInit {
     this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'ticker' ] + id + '/?no_cache=' + Math.random() )
       .subscribe( data => {
       this.coin = data[ 0 ];
+
       this.loadChart( this.coin[ 'id' ] );
     });
   }
 
   loadChart( id ) {
-    this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'chart' ] + id + '/?no_cache=' + Math.random() )
+    const diffTime = this.getDiffTime( this.defaultTimeChart[ 'value' ] );
+    this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'chart' ] + id + '/' + diffTime[ 'start' ] + '/' + diffTime[ 'end' ] + '/?no_cache=' + Math.random() )
       .subscribe( data => {
         this.fetchChartData( data );
       } );
   }
 
   fetchChartData( dataToFetch ) {
-    const auxPriceBtc = [];
     const auxPriceUsd = [];
-
-    /*dataToFetch['price_btc'].forEach( data => {
-      auxPriceBtc.push( { x: new Date(data[ 0 ]), y: data[ 1 ] } );
-    } );*/
 
     dataToFetch['price_usd'].forEach( data => {
       auxPriceUsd.push( { x: new Date(data[ 0 ]), y: data[ 1 ] } );
@@ -64,8 +65,21 @@ export class CoinInfoComponent implements OnInit {
     this.renderizeChart( auxPriceUsd );
   }
 
-  renderizeChart( auxPriceUsd ) {
+  changeChartData( name, value ) {
+    this.defaultTimeChart[ 'name' ] = name;
+    this.defaultTimeChart[ 'value' ] = value;
+    this.loadChart( this.coin[ 'id' ] );
+  }
 
+  getDiffTime( hours ) {
+    const diffTime = ( 1000 * 60 * 60 * hours );
+    const now = new Date();
+    const secs = now.getTime();
+
+    return { start: secs - diffTime, end: secs };
+  }
+
+  renderizeChart( auxPriceUsd ) {
     const ctx = document.getElementById('myChart');
     const myChart = new Chart(ctx, {
       type: 'line',

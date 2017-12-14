@@ -100,3 +100,15 @@ html, body {
   background: #FFF;
   border-radius: 50%;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.selected {
+  border-bottom: 1px solid #333;
+  transition: 1s ease-in-out all;
+  -webkit-transition: .3s ease-in-out all;
+
+  font-weight: bold;
+}
