@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadCoins() {
-    this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ] + '?no_cache=' + Math.random() )
+    this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'ticker' ] + '?no_cache=' + Math.random() )
     .subscribe( data => {
       this.fetchData( data );
     } );
@@ -60,17 +60,17 @@ export class HomeComponent implements OnInit {
 
   viewCoin( coin ) {
     window.open(
-      '#/coin/' + coin.id,
-      'coin',
+      '#/coin/' + coin[ 'id' ],
+      'coin' + coin[ 'id' ],
       'resizable=false,' +
       'x=center,' +
       'y=center,' +
-      'width=300,' +
-      'height=280,' +
-      'maxWidth=301,' +
-      'maxHeight=281,' +
-      'minWidth=301,' +
-      'minHeight=281,' +
+      'width=340,' +
+      'height=450,' +
+      'maxWidth=341,' +
+      'maxHeight=451,' +
+      'minWidth=341,' +
+      'minHeight=451,' +
       'skipTaskbar=false,' +
       'alwaysOnTop=false'
     );
