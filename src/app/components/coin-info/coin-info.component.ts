@@ -14,11 +14,10 @@ export class CoinInfoComponent implements OnInit {
 
   settings: object = {};
   coin: any = [];
+  chart: any;
   private sub: any;
-  defaultTimeChart = {
-    name: '1w',
-    value: 24 * 7
-  };
+  defaultTimeChart = 24 * 7;
+  loadingChart = true;
 
   constructor(
     private http: HttpClient,
@@ -48,7 +47,8 @@ export class CoinInfoComponent implements OnInit {
   }
 
   loadChart( id ) {
-    const diffTime = this.getDiffTime( this.defaultTimeChart[ 'value' ] );
+    this.loadingChart = true;
+    const diffTime = this.getDiffTime( this.defaultTimeChart );
     this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'chart' ] + id + '/' + diffTime[ 'start' ] + '/' + diffTime[ 'end' ] + '/?no_cache=' + Math.random() )
       .subscribe( data => {
         this.fetchChartData( data );
@@ -57,17 +57,22 @@ export class CoinInfoComponent implements OnInit {
 
   fetchChartData( dataToFetch ) {
     const auxPriceUsd = [];
+    const auxPriceBtc = [];
 
-    dataToFetch['price_usd'].forEach( data => {
-      auxPriceUsd.push( { x: new Date(data[ 0 ]), y: data[ 1 ] } );
+    dataToFetch[ 'price_usd' ].forEach( data => {
+      auxPriceUsd.push( { x: new Date( data[ 0 ] ), y: data[ 1 ] } );
     } );
 
-    this.renderizeChart( auxPriceUsd );
+    dataToFetch[ 'price_btc' ].forEach( data => {
+      auxPriceBtc.push( { x: new Date( data[ 0 ] ), y: data[ 1 ] } );
+    } );
+
+    this.renderizeChart( auxPriceUsd, auxPriceBtc );
   }
 
-  changeChartData( name, value ) {
-    this.defaultTimeChart[ 'name' ] = name;
-    this.defaultTimeChart[ 'value' ] = value;
+  changeChartTime( value ) {
+    this.defaultTimeChart = value;
+    this.chart.destroy();
     this.loadChart( this.coin[ 'id' ] );
   }
 
@@ -79,9 +84,9 @@ export class CoinInfoComponent implements OnInit {
     return { start: secs - diffTime, end: secs };
   }
 
-  renderizeChart( auxPriceUsd ) {
-    const ctx = document.getElementById('myChart');
-    const myChart = new Chart(ctx, {
+  renderizeChart( auxPriceUsd, auxPriceBtc ) {
+    const ctx = document.getElementById('chart');
+    this.chart = new Chart(ctx, {
       type: 'line',
       data: {
         datasets: [
@@ -90,6 +95,16 @@ export class CoinInfoComponent implements OnInit {
             backgroundColor: 'rgb(0, 99, 132)',
             borderColor: 'rgb(0, 99, 132)',
             data: auxPriceUsd,
+            pointRadius: 0,
+            fill: false,
+            lineTension: 0,
+            borderWidth: 1
+          },
+          {
+            label: 'BTC',
+            backgroundColor: 'rgb(100, 199, 132)',
+            borderColor: 'rgb(100, 199, 132)',
+            data: auxPriceBtc,
             pointRadius: 0,
             fill: false,
             lineTension: 0,
@@ -124,6 +139,8 @@ export class CoinInfoComponent implements OnInit {
         }
       }
     });
+
+    this.loadingChart = false;
 
   }
 
