@@ -25,7 +25,7 @@ export const DEFAULT_SETTINGS = {
   DARK_THEME: true,
 
   /** Default coin to show on bar */
-  COINS: [ 'btc' ],
+  COINS: [ 'bitcoin' ],
 
   /** Default exchanges to show on bar */
   EXCHANGES: [
