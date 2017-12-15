@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { API_URLS } from 'config';
 import { SettingsService } from '../../providers/settings.service';
+import { ApiService } from '../../providers/api.service';
 import Chart from 'chart.js';
 
 @Component({
@@ -20,9 +19,9 @@ export class CoinInfoComponent implements OnInit {
   loadingChart = true;
 
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private apiService: ApiService
   ) {
     this.settings = this.settingsService.getSettings();
   }
@@ -38,10 +37,8 @@ export class CoinInfoComponent implements OnInit {
   }
 
   loadCurrency( id ) {
-    this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'ticker' ] + id + '/?no_cache=' + Math.random() )
-      .subscribe( data => {
+    this.apiService.getCoin( id ).subscribe( data => {
       this.coin = data[ 0 ];
-
       this.loadChart( this.coin[ 'id' ] );
     });
   }
@@ -49,10 +46,10 @@ export class CoinInfoComponent implements OnInit {
   loadChart( id ) {
     this.loadingChart = true;
     const diffTime = this.getDiffTime( this.defaultTimeChart );
-    this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'chart' ] + id + '/' + diffTime[ 'start' ] + '/' + diffTime[ 'end' ] + '/?no_cache=' + Math.random() )
-      .subscribe( data => {
+
+    this.apiService.getChart( id, diffTime ).subscribe( data => {
         this.fetchChartData( data );
-      } );
+    } );
   }
 
   fetchChartData( dataToFetch ) {

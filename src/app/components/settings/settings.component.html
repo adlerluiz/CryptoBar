@@ -21,7 +21,7 @@
           </tr-->
 
           <tr>
-            <td>Time to refresh</td>
+            <td> Refresh time </td>
             <td class="range-field">
               <input type="range" min="5" max="300" [(ngModel)]="settings[ 'TIMEOUT' ]" />
               <label> {{ settings[ 'TIMEOUT' ] }} {{ settings[ 'TIMEOUT' ] != 1 ? "Seconds" : "Second" }} </label>
@@ -42,7 +42,7 @@
           </tr>
 
           <tr>
-            <td>Display Coin</td>
+            <td> Display Coin </td>
             <td>
               <p>
                 <input name="display_coin" type="radio" id="name" value="name" [(ngModel)]="settings[ 'COIN_DISPLAY' ]" />
@@ -57,7 +57,7 @@
           </tr>
 
           <tr>
-            <td>Show coin icon</td>
+            <td> Show coin icon </td>
             <td>
               <div class="switch">
                 <label>
@@ -81,22 +81,6 @@
                   On
                 </label>
               </div>
-            </td>
-          </tr-->
-
-          <!--tr>
-            <td>Coins</td>
-            <td>
-              <a class="waves-effect waves-light btn small orange modal-trigger" href="#modalAddCoin">Edit</a>
-              <label> ({{ coins.length }} {{ coins.length > 1 ? "coins" : "coin" }}) </label>
-            </td>
-          </tr>
-
-          <tr>
-            <td>Exchanges</td>
-            <td>
-              <a class="waves-effect waves-light btn small orange modal-trigger" href="#modalAddExchange">Edit</a>
-              <label> ({{ exchanges.length }} {{ exchanges.length > 1 ? "exchanges" : "exchange" }}) </label>
             </td>
           </tr-->
 

@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ElectronService } from './providers/electron.service';
 import { StorageService } from './providers/storage.service';
 import { SettingsService } from './providers/settings.service';
+import { ApiService } from './providers/api.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CoinInfoComponent } from './components/coin-info/coin-info.component';
@@ -33,7 +34,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ElectronService, StorageService, SettingsService],
+  providers: [ElectronService, StorageService, SettingsService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

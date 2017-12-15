@@ -12,7 +12,8 @@
     <span class="grey-text">#{{ coin['rank'] }}</span>
   </div>
 
-  <div class="row no-drag" style="height: 33vh; width: 100vw;">
+  <div class="row no-drag" style="height: 32.6vh; width: 100vw;">
+
     <div class="center" *ngIf="loadingChart" style="padding-top: 50px !important;">
       <div class="preloader-wrapper small active">
         <div class="spinner-layer spinner-blue-only">
@@ -26,12 +27,13 @@
         </div>
       </div>
     </div>
+
     <canvas id="chart"></canvas>
   </div>
 
   <div class="row">
 
-    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart == 1 }" (click)="changeChartTime( 1 )">
+    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart === 1 }" (click)="changeChartTime( 1 )">
       <i class="material-icons" [ngClass]="{ 'green-text': coin['percent_change_1h'] > 0, 'red-text': coin['percent_change_1h'] < 0 }">
         {{ coin['percent_change_1h'] > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
       </i>
@@ -40,7 +42,7 @@
       <span class="grey-text">1h</span>
     </div>
 
-    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart == 24 }" (click)="changeChartTime( 24 )">
+    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart === 24 }" (click)="changeChartTime( 24 )">
       <i class="material-icons" [ngClass]="{ 'green-text': coin['percent_change_24h'] > 0, 'red-text': coin['percent_change_24h'] < 0 }">
         {{ coin['percent_change_24h'] > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
       </i>
@@ -49,7 +51,7 @@
       <span class="grey-text">24h</span>
     </div>
 
-    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart == 168 }" (click)="changeChartTime( 168 )">
+    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart === 168 }" (click)="changeChartTime( 168 )">
       <i class="material-icons" [ngClass]="{ 'green-text': coin['percent_change_7d'] > 0, 'red-text': coin['percent_change_7d'] < 0 }">
         {{ coin.percent_change_7d > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
       </i>

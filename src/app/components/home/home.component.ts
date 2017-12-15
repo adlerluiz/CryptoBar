@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { API_URLS } from 'config';
 import { SettingsService } from '../../providers/settings.service';
+import { ApiService } from '../../providers/api.service';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +14,8 @@ export class HomeComponent implements OnInit {
   exchanges: any = [];
 
   constructor(
-    private http: HttpClient,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private apiService: ApiService
   ) {
     this.settings = this.settingsService.getSettings();
     this.loadCoins();
@@ -30,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadCoins() {
-    this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'ticker' ] + '?no_cache=' + Math.random() )
+    this.apiService.getCoins()
     .subscribe( data => {
       this.fetchData( data );
     } );
@@ -55,7 +54,7 @@ export class HomeComponent implements OnInit {
   }
 
   getPercentChangeArrow( data ) {
-    return data[ this.settings['PERCENT_CHANGE'] ];
+    return data[ this.settings[ 'PERCENT_CHANGE' ] ];
   }
 
   viewCoin( coin ) {
@@ -66,11 +65,11 @@ export class HomeComponent implements OnInit {
       'x=center,' +
       'y=center,' +
       'width=340,' +
-      'height=450,' +
+      'height=440,' +
       'maxWidth=341,' +
-      'maxHeight=451,' +
+      'maxHeight=441,' +
       'minWidth=341,' +
-      'minHeight=451,' +
+      'minHeight=441,' +
       'skipTaskbar=false,' +
       'alwaysOnTop=false'
     );
