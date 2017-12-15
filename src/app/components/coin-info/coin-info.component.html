@@ -31,7 +31,7 @@
 
   <div class="row">
 
-    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart == '1' }" (click)="changeChartTime( 1 )">
+    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart == 1 }" (click)="changeChartTime( 1 )">
       <i class="material-icons" [ngClass]="{ 'green-text': coin['percent_change_1h'] > 0, 'red-text': coin['percent_change_1h'] < 0 }">
         {{ coin['percent_change_1h'] > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
       </i>
@@ -40,7 +40,7 @@
       <span class="grey-text">1h</span>
     </div>
 
-    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart == '24' }" (click)="changeChartTime( 24 )">
+    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart == 24 }" (click)="changeChartTime( 24 )">
       <i class="material-icons" [ngClass]="{ 'green-text': coin['percent_change_24h'] > 0, 'red-text': coin['percent_change_24h'] < 0 }">
         {{ coin['percent_change_24h'] > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
       </i>
@@ -49,7 +49,7 @@
       <span class="grey-text">24h</span>
     </div>
 
-    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart == '168' }" (click)="changeChartTime( 168 )">
+    <div class="col s4 center no-drag pointer" [ngClass]="{ selected: defaultTimeChart == 168 }" (click)="changeChartTime( 168 )">
       <i class="material-icons" [ngClass]="{ 'green-text': coin['percent_change_7d'] > 0, 'red-text': coin['percent_change_7d'] < 0 }">
         {{ coin.percent_change_7d > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
       </i>

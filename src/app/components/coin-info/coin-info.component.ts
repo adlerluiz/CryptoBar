@@ -16,7 +16,7 @@ export class CoinInfoComponent implements OnInit {
   coin: any = [];
   chart: any;
   private sub: any;
-  defaultTimeChart = 24 * 7;
+  defaultTimeChart: number = 24 * 7;
   loadingChart = true;
 
   constructor(
