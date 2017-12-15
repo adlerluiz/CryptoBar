@@ -133,9 +133,10 @@
       </div>
     </div>
 
-    <div class="collection">
+    <div class="collection" [sortablejs]="coins">
       <a class="collection-item" *ngFor="let coin of coins; let i = index">
         <span class="badge" style="cursor: pointer;" (click)="removeCoin(i)"> <i class="material-icons tiny red-text">close</i> </span>
+        <span style="cursor: move; color: #888;"> <sub> <i class="material-icons tiny left-align">dehaze</i> </sub> </span>
         {{ coin }}
       </a>
     </div>
@@ -166,9 +167,10 @@
       </button>
     </div>
 
-    <div class="collection">
+    <div class="collection" [sortablejs]="exchanges">
       <a class="collection-item" *ngFor="let exchange of exchanges; let i = index">
         <span class="badge" style="cursor: pointer;" (click)="removeExchange(i)"> <i class="material-icons tiny red-text">close</i> </span>
+        <span style="cursor: move; color: #888;"> <sub> <i class="material-icons tiny left-align">dehaze</i> </sub> </span>
         {{ exchange[ 'name' ] }}
       </a>
     </div>

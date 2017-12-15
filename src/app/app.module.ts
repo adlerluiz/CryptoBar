@@ -21,6 +21,7 @@ import { CoinInfoComponent } from './components/coin-info/coin-info.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
 import { Ng2CompleterModule } from 'ng2-completer';
+import {SortablejsModule} from 'angular-sortablejs';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { Ng2CompleterModule } from 'ng2-completer';
     HttpModule,
     AppRoutingModule,
     HttpClientModule,
-    Ng2CompleterModule
+    Ng2CompleterModule,
+    SortablejsModule.forRoot({ animation: 150 }),
   ],
   providers: [ElectronService, StorageService, SettingsService, ApiService],
   bootstrap: [AppComponent]

@@ -44,6 +44,7 @@
     "@angular/platform-browser": "4.4.3",
     "@angular/platform-browser-dynamic": "4.4.3",
     "@angular/router": "4.4.3",
+    "angular-sortablejs": "^2.4.1",
     "chart.js": "^2.7.1",
     "core-js": "2.4.1",
     "electron-is-dev": "^0.3.0",
@@ -52,6 +53,7 @@
     "materialize-css": "^0.100.2",
     "ng2-completer": "^1.6.3",
     "rxjs": "5.4.3",
+    "sortablejs": "^1.7.0",
     "zone.js": "0.8.17"
   },
   "devDependencies": {

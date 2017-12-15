@@ -20,7 +20,7 @@ export class SettingsComponent implements OnInit {
 	  version: '1'
   };
 
-  dataService: CompleterData;
+  //dataService: CompleterData;
 
   constructor(
     private settingsService: SettingsService,
@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
   ) {
 
     this.apiService.getCoins().subscribe( data => {
-      this.dataService = completerService.local( data, 'name,symbol', 'symbol' );
+      //this.dataService = completerService.local( data, 'name,symbol', 'symbol' );
     } );
   }
 
