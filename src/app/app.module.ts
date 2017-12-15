@@ -20,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoinInfoComponent } from './components/coin-info/coin-info.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
+import { Ng2CompleterModule } from 'ng2-completer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2CompleterModule
   ],
   providers: [ElectronService, StorageService, SettingsService, ApiService],
   bootstrap: [AppComponent]

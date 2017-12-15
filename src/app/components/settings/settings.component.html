@@ -123,7 +123,7 @@
 
     <div class="row">
       <div class="col s8">
-        <input type="text" [(ngModel)]="modalInputCoin" placeholder="Coin symbol" />
+        <ng2-completer [(ngModel)]="modalInputCoin" [datasource]="dataService" [minSearchLength]="2"></ng2-completer>
       </div>
 
       <div class="col s1">

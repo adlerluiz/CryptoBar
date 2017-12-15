@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../../providers/settings.service';
+import { ApiService } from '../../providers/api.service';
 import { HttpClient } from '@angular/common/http';
+import { CompleterService, CompleterData } from 'ng2-completer';
 
 @Component({
   selector: 'app-settings',
@@ -9,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SettingsComponent implements OnInit {
 
-  settings: object = {};
+  settings: any = {};
   coins: any = [];
   exchanges: any = [];
   modalInputCoin = '';
@@ -18,19 +20,26 @@ export class SettingsComponent implements OnInit {
 	  version: '1'
   };
 
+  dataService: CompleterData;
+
   constructor(
     private settingsService: SettingsService,
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private apiService: ApiService,
+    private completerService: CompleterService
+  ) {
+
+    this.apiService.getCoins().subscribe( data => {
+      this.dataService = completerService.local( data, 'name,symbol', 'symbol' );
+    } );
+  }
 
   ngOnInit() {
     this.settings = this.settingsService.getSettings();
+    this.http.get('./package.json').subscribe( data => this.package = data );
 
     this.coins = this.settings[ 'COINS' ];
     this.exchanges = this.settings[ 'EXCHANGES' ];
-
-    this.http.get('./package.json')
-      .subscribe(data => this.package = data);
   }
 
   close() {
