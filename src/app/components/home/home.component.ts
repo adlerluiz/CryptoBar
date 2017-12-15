@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
 
     this.settings[ 'COINS' ].forEach( ic => {
       data.forEach( item => {
-        if ( ic.toUpperCase() === item.symbol ) {
+        if ( ic === item.id ) {
           aux.push( item );
         }
       })

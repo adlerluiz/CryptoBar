@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
   ) {
 
     this.apiService.getCoins().subscribe( (data: any) => {
-      this.dataService = completerService.local( data, 'name,symbol', 'symbol' );
+      this.dataService = completerService.local( data, 'name,symbol', 'id' );
     } );
   }
 
