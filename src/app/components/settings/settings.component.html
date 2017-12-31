@@ -62,7 +62,7 @@
               <div class="switch">
                 <label>
                   Off
-                  <input type="checkbox" [(ngModel)]="settings[ 'SHOW_IMAGE_BAR' ]">
+                  <input type="checkbox" [(ngModel)]="settings[ 'SHOW_IMAGE_BAR' ]" [disabled]="settings[ 'SHOW_ONLY_IMAGE_BAR' ]">
                   <span class="lever"></span>
                   On
                 </label>
@@ -70,19 +70,19 @@
             </td>
           </tr>
 
-          <!--tr>
-            <td>Black theme</td>
+          <tr>
+            <td> Show only coin icon </td>
             <td>
               <div class="switch">
                 <label>
                   Off
-                  <input type="checkbox" [(ngModel)]="settings.darkTheme">
+                  <input type="checkbox" [(ngModel)]="settings[ 'SHOW_ONLY_IMAGE_BAR' ]">
                   <span class="lever"></span>
                   On
                 </label>
               </div>
             </td>
-          </tr-->
+          </tr>
 
         </tbody>
       </table>

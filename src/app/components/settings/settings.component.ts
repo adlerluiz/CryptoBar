@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
   modalInputCoin = '';
   modalExchange = {};
   package: any = {
-	  version: '1'
+	  version: '0'
   };
 
   dataService: any;

@@ -21,6 +21,9 @@ export const DEFAULT_SETTINGS = {
   /** Show image of coin on bar */
   SHOW_IMAGE_BAR: true,
 
+  /** Show only image of coin on bar */
+  SHOW_ONLY_IMAGE_BAR: false,
+
   /** Use dark theme for app */
   DARK_THEME: true,
 

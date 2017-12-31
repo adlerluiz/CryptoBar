@@ -15,8 +15,8 @@
   </div>
 
   <span class="swing coin no-drag" *ngFor="let result of results" (click)="viewCoin( result )">
-      <img *ngIf="settings[ 'SHOW_IMAGE_BAR' ]" src="https://files.coinmarketcap.com/static/img/coins/64x64/{{ result[ 'id' ] }}.png" width="20" class="responsive-img rounded" style="padding: 1px;" />
-      <sup style="color: #AAA;">{{ result[ settings[ 'COIN_DISPLAY' ] ] }}</sup>
+      <img *ngIf="settings[ 'SHOW_IMAGE_BAR' ] || settings[ 'SHOW_ONLY_IMAGE_BAR' ]" src="https://files.coinmarketcap.com/static/img/coins/64x64/{{ result[ 'id' ] }}.png" width="20" class="responsive-img rounded" style="padding: 1px;" />
+      <sup style="color: #AAA;" *ngIf="!settings[ 'SHOW_ONLY_IMAGE_BAR' ]">{{ result[ settings[ 'COIN_DISPLAY' ] ] }}</sup>
       <sub>
         <i class="material-icons" [ngClass]="{ 'green-text': getPercentChangeArrow( result ) > 0, 'red-text': getPercentChangeArrow( result ) < 0 }">
           {{ getPercentChangeArrow( result ) > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
