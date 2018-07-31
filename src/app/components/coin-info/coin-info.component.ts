@@ -38,7 +38,7 @@ export class CoinInfoComponent implements OnInit {
   }
 
   loadCurrency( id ) {
-    this.apiService.getCoin( id ).subscribe( data => {
+    this.apiService.getCoin( id ).subscribe( (data: any) => {
       this.coin = data.data;
       this.loadChart( this.coin[ 'id' ] );
     });
