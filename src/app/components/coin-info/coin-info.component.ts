@@ -17,6 +17,7 @@ export class CoinInfoComponent implements OnInit {
   private sub: any;
   defaultTimeChart: number = 24 * 7;
   loadingChart = true;
+  errorLoadChart = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +39,7 @@ export class CoinInfoComponent implements OnInit {
 
   loadCurrency( id ) {
     this.apiService.getCoin( id ).subscribe( data => {
-      this.coin = data[ 0 ];
+      this.coin = data.data;
       this.loadChart( this.coin[ 'id' ] );
     });
   }
@@ -46,10 +47,10 @@ export class CoinInfoComponent implements OnInit {
   loadChart( id ) {
     this.loadingChart = true;
     const diffTime = this.getDiffTime( this.defaultTimeChart );
-
     this.apiService.getChart( id, diffTime ).subscribe( data => {
-        this.fetchChartData( data );
-    } );
+      this.errorLoadChart = false;
+      this.fetchChartData( data );
+    }, error => { this.errorLoadChart = true; } );
   }
 
   fetchChartData( dataToFetch ) {

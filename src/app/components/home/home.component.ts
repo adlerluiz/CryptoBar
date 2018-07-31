@@ -43,8 +43,8 @@ export class HomeComponent implements OnInit {
     const aux = [];
 
     this.settings[ 'COINS' ].forEach( ic => {
-      data.forEach( item => {
-        if ( ic === item.id ) {
+      data.data.forEach( item => {
+        if ( ic === item.website_slug ) {
           aux.push( item );
         }
       })

@@ -1,6 +1,6 @@
 export const API_URLS = {
   'coinmarketcap': {
-    ticker: 'https://api.coinmarketcap.com/v1/ticker/',
+    ticker: 'https://api.coinmarketcap.com/v2/ticker/',
     chart: 'https://graphs.coinmarketcap.com/currencies/'
   }
 };

@@ -18,12 +18,12 @@
       <img *ngIf="settings[ 'SHOW_IMAGE_BAR' ] || settings[ 'SHOW_ONLY_IMAGE_BAR' ]" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{ result[ 'id' ] }}.png" width="20" class="responsive-img rounded" style="padding: 1px;" />
       <sup style="color: #AAA;" *ngIf="!settings[ 'SHOW_ONLY_IMAGE_BAR' ]">{{ result[ settings[ 'COIN_DISPLAY' ] ] }}</sup>
       <sub>
-        <i class="material-icons" [ngClass]="{ 'green-text': getPercentChangeArrow( result ) > 0, 'red-text': getPercentChangeArrow( result ) < 0 }">
-          {{ getPercentChangeArrow( result ) > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
+        <i class="material-icons" [ngClass]="{ 'green-text': getPercentChangeArrow( result['quotes']['USD'] ) > 0, 'red-text': getPercentChangeArrow( result['quotes']['USD'] ) < 0 }">
+          {{ getPercentChangeArrow( result['quotes']['USD'] ) > 0 ? "arrow_drop_up" : "arrow_drop_down" }}
         </i>
       </sub>
       <sup>
-        {{ getPercentChangeArrow( result ) }}%  
+        {{ getPercentChangeArrow( result['quotes']['USD'] ) }}%  
         <span class="separator"> </span>
       </sup>
   </span>

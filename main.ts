@@ -84,6 +84,7 @@ function createTray() {
   tray.setContextMenu( contextMenu );
 
   win.show();
+  // win.webContents.openDevTools();
 
   tray.on('click', () => {
     win.show();

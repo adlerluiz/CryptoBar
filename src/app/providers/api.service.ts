@@ -17,11 +17,11 @@ export class ApiService {
   }
 
   getCoins() {
-    return this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'ticker' ] + this.noCache + '&limit=9999' );
+    return this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'ticker' ] + this.noCache + '&&structure=array&limit=9999' );
   }
 
   getCoin( id ) {
-    return this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'ticker' ] + id + '/' + this.noCache );
+    return this.http.get( API_URLS[ this.settings[ 'API_SELECTED' ] ][ 'ticker' ] + id + '/' + this.noCache + '&convert=BTC' );
   }
 
   getChart( id, diffTime ) {
