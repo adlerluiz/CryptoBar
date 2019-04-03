@@ -1,13 +1,7 @@
-# Introduction
+![Pic1](src/assets/product/cryptobar.png)
 
-CryptoBar is a way to check variations on your cryptocurrencies and tokens on a discreet bar.
+## CryptoBar is a way to check variations on your cryptocurrencies and tokens on a discreet bar.
 
-Currently runs with:
-
-- Angular v4.3.5
-- Electron v1.7.6
-
-Provided by [Angular-Electron](https://github.com/maximegris/angular-electron)
 
 ## Getting Started
 
@@ -44,5 +38,5 @@ See [Angular-Electron](https://github.com/maximegris/angular-electron) to learn 
 <br />
 [rickinbsb](https://github.com/rickinbsb)
 
-![Pic1](src/assets/product/cryptobar.png)
+
 ![Pic1](src/assets/product/cryptobar_settings.png)
