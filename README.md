@@ -37,6 +37,3 @@ See [Angular-Electron](https://github.com/maximegris/angular-electron) to learn 
 [adlerluiz](https://github.com/adlerluiz)
 <br />
 [rickinbsb](https://github.com/rickinbsb)
-
-
-![Pic1](src/assets/product/cryptobar_settings.png)
