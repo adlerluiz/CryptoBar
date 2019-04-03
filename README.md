@@ -35,10 +35,6 @@ And finally:
 npm start  
 ```
 
-## Todo
-- [ ] Autoupdate
-- [ ] notification when value hit x
-
 ## To contribute
 
 See [Angular-Electron](https://github.com/maximegris/angular-electron) to learn more commands and enjoy =D.
@@ -47,3 +43,6 @@ See [Angular-Electron](https://github.com/maximegris/angular-electron) to learn 
 [adlerluiz](https://github.com/adlerluiz)
 <br />
 [rickinbsb](https://github.com/rickinbsb)
+
+![Pic1](src/assets/product/cryptobar.png)
+![Pic1](src/assets/product/cryptobar_settings.png)
