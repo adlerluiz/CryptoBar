@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../../providers/settings.service';
 import { ApiService } from '../../providers/api.service';
+import { MessageService } from '../../providers/message.service';
 
 @Component({
   selector: 'app-home',
@@ -54,7 +55,11 @@ export class HomeComponent implements OnInit {
   }
 
   getPercentChangeArrow( data ) {
-    return data[ this.settings[ 'PERCENT_CHANGE' ] ];
+    return data['quotes']['USD'][ this.settings[ 'PERCENT_CHANGE' ] ];
+  }
+
+  getPrice( data ) {
+    return data['quotes']['USD'][ 'price' ];
   }
 
   viewCoin( coin ) {
@@ -90,6 +95,10 @@ export class HomeComponent implements OnInit {
       'maximizable=true,' +
       'alwaysOnTop=false'
     );
+  }
+
+  showIcon( settings ) {
+    return settings[ 'SHOW_IMAGE_BAR' ] || settings[ 'SHOW_ONLY_IMAGE_BAR' ];
   }
 
 }

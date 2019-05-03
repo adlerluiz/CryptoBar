@@ -15,6 +15,7 @@ import { ElectronService } from './providers/electron.service';
 import { StorageService } from './providers/storage.service';
 import { SettingsService } from './providers/settings.service';
 import { ApiService } from './providers/api.service';
+import { MessageService } from './providers/message.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CoinInfoComponent } from './components/coin-info/coin-info.component';
@@ -39,7 +40,7 @@ import {SortablejsModule} from 'angular-sortablejs';
     Ng2CompleterModule,
     SortablejsModule.forRoot({ animation: 150 }),
   ],
-  providers: [ElectronService, StorageService, SettingsService, ApiService],
+  providers: [ElectronService, StorageService, SettingsService, ApiService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
