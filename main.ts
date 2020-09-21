@@ -9,7 +9,7 @@ const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 
 if (serve) {
-  require('electron-reload')( __dirname, {} );
+  require('electron-reload')(__dirname, {});
 }
 
 const store = new Store();
@@ -18,12 +18,12 @@ function createWindow() {
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
-  _width = ( store.get('config.width') ) ? store.get('config.width') : size.width;
-  _height = ( store.get('config.height') ) ? store.get('config.height') : 40;
+  _width = (store.get('window-size').width) ? store.get('window-size').width : size.width;
+  _height = (store.get('window-size').height) ? store.get('window-size').height : 40;
 
-  _offsetX = ( store.get('config.offsetX') ) ? store.get('config.offsetX') : 0;
-  _offsetY = ( store.get('config.offsetY') ) ? store.get('config.offsetY') : size.height - _height;
-  _alwaysOnTop = ( store.get('config.alwaysOnTop') ? store.get('config.alwaysOnTop') : false );
+  _offsetX = (store.get('window-position').x) ? store.get('window-position').x : 0;
+  _offsetY = (store.get('window-position').y) ? store.get('window-position').y : size.height - _height;
+  _alwaysOnTop = (store.get('always-top') ? store.get('always-top') : false);
 
   win = new BrowserWindow({
     title: 'CryptoBar',
@@ -41,6 +41,8 @@ function createWindow() {
 
     alwaysOnTop: _alwaysOnTop,
 
+    resizable: true,
+
     webPreferences: {
       nodeIntegration: false
     }
@@ -52,12 +54,29 @@ function createWindow() {
     win = null;
   });
 
+  let storePositionTimer
+
   win.on('move', () => {
-    store.set( 'config.width', win.getSize()[0] );
-    store.set( 'config.height', win.getSize()[1] );
-    store.set( 'config.offsetX', win.getPosition()[0] );
-    store.set( 'config.offsetY', win.getPosition()[1] );
+    let position = win.getPosition()
+    if (storePositionTimer) {
+      clearTimeout(storePositionTimer)
+    }
+    storePositionTimer = setTimeout(() => {
+      store.set('window-position', {
+        x: position[0],
+        y: position[1],
+      })
+    }, 500)
   });
+
+  win.on('resize', function () {
+    let windowSize = win.getSize()
+
+    store.set('window-size', {
+      width: windowSize[0],
+      height: windowSize[1],
+    })
+  })
 
   createTray();
 }
@@ -66,22 +85,26 @@ function createTray() {
   const trayIcon = path.join(__dirname, 'favicon.ico');
   const nimage = nativeImage.createFromPath(trayIcon);
 
-  tray = new Tray( nimage );
+  tray = new Tray(nimage);
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Settings', type: 'normal', click: () => { openSettings() } },
-    { label: 'Always on top', type: 'checkbox', checked: _alwaysOnTop, click: () => {
-      _alwaysOnTop = !win.isAlwaysOnTop();
+    {
+      label: 'Always on top', type: 'checkbox', checked: _alwaysOnTop, click: () => {
+        _alwaysOnTop = !win.isAlwaysOnTop();
 
-      win.setAlwaysOnTop( _alwaysOnTop );
-      store.set( 'config.alwaysOnTop', _alwaysOnTop );
-    } },
+        win.setAlwaysOnTop(_alwaysOnTop);
+        store.set('always-top', _alwaysOnTop);
+      }
+    },
     { type: 'separator' },
-    { label: 'Exit', type: 'normal', click: () => {
-      app.quit()
-    } }
+    {
+      label: 'Exit', type: 'normal', click: () => {
+        app.quit()
+      }
+    }
   ]);
-  tray.setToolTip( 'CryptoBar' );
-  tray.setContextMenu( contextMenu );
+  tray.setToolTip('CryptoBar');
+  tray.setContextMenu(contextMenu);
 
   win.show();
   // win.webContents.openDevTools();

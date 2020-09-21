@@ -52,6 +52,7 @@
     "enhanced-resolve": "3.3.0",
     "materialize-css": "^0.100.2",
     "ng2-completer": "^1.6.3",
+    "node-sass": "^4.14.1",
     "rxjs": "5.4.3",
     "sortablejs": "^1.7.0",
     "zone.js": "0.8.17"
